@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi novia?</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            height: 400px;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1, h2 {
+            color: #ff6f61;
+        }
+
+        p {
+            color: #555;
+            font-size: 18px;
+        }
+
+        .btn {
+            background-color: #ff6f61;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            z-index: 2;
+        }
+
+        .btn:hover {
+            background-color: #ff3b2e;
+        }
+
+        #pregunta {
+            display: none;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espacio entre los botones */
+        }
+
+        #moving-button {
+            position: relative;
+            background-color: #ff6f61;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s ease;
+            z-index: 2;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6f61;
+            opacity: 0.7;
+            transform: rotate(45deg);
+            animation: fall 2s infinite ease-out;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hola, Wendy</h1>
+        <p>He creado esta página para hacerte una pregunta muy importante.</p>
+        <button class="btn" onclick="mostrarPregunta()">Haz clic para continuar</button>
+    </div>
+
+    <div id="pregunta" class="container">
+        <h2>¿Quieres ser mi novia?</h2>
+        <div class="button-container">
+            <a href="https://wa.me/5527303713?text=Claro%20que%20quiero%20ser%20tu%20novia%20" class="btn" target="_blank">¡Claro que sí!</a>
+            <button id="moving-button" onmouseover="moverBoton()">NO</button>
+        </div>
+    </div>
+
+    <div class="confetti" id="confetti-container"></div>
+
+    <script>
+        function mostrarPregunta() {
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('pregunta').style.display = 'flex';
+        }
+
+        function moverBoton() {
+            const button = document.getElementById('moving-button');
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            // Obtenemos el tamaño del botón
+            const buttonWidth = button.offsetWidth;
+            const buttonHeight = button.offsetHeight;
+
+            // Calculamos el máximo desplazamiento en x y y dentro del viewport
+            const maxX = viewportWidth - buttonWidth;
+            const maxY = viewportHeight - buttonHeight;
+
+            // Generamos nuevas coordenadas dentro del viewport
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            // Ajustamos la posición del botón usando transform
+            button.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+</html>
